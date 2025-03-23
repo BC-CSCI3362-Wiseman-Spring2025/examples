@@ -55,7 +55,7 @@ void *consumer(void *arg)
 
     // have to allocate heap memory for the return value
     // don't forget to free in main()!
-    int *my_total = (int *)malloc(sizeof(int));
+    long *my_total = (long *)malloc(sizeof(long));
     if (my_total == NULL)
     {
         return NULL;
@@ -153,10 +153,10 @@ int main(int argc, char *argv[])
     }
 
     // wait on all consumers and get their results
-    int total = 0;
+    long total = 0;
     for (int i=0; i<NUM_CONS; ++i)
     {
-        int *res;
+        long *res;
         if (pthread_join(cons[i], (void **)&res) != 0)
         {
             perror("pthread_join");
@@ -173,7 +173,7 @@ int main(int argc, char *argv[])
     free(cons);
     cleanup_queue(q);
 
-    printf("Total final value: %i\n", total);
+    printf("Total final value: %li\n", total);
 
     return 0;
 }
